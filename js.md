@@ -320,19 +320,19 @@ fo(); // { a: 111 } [111, 222] undefined
 
     for (let i = 0; i < 10; i++) {
         console.log(i);
-        if (i > 2) // 跳出;  // 使用return 任何 / break 均可跳出循环
+        if (i > 2) // 跳出;  // 使用return 任何 / break 均可跳出循环 注意：使用return跳出后后面的代码也将不执行
     }
 
     const obj = {a:2,b:4}
     for (key in obj) {
-        console.log(key)
-        if (key === 'a') //跳出 // 使用return 任何 / break 均可跳出循环
+        console.log(key);
+        if (key === 'a') //跳出 // 使用return 任何 / break 均可跳出循环 注意：使用return跳出后后面的代码也将不执行
     }
 
     const arr = [1,2,3,4,5]
     for (const a of arr) {
-        console.log(a)
-        if (a === 1) return null //跳出 // 使用return 任何 / break 均可跳出循环
+        console.log(a);
+        if (a === 1) return null //跳出 // 使用return 任何 / break 均可跳出循环  注意：使用return跳出后后面的代码也将不执行
     }
 
     every() 方法测试一个数组内的所有元素是否都能通过某个指定函数的测试。它返回一个布尔值。
