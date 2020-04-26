@@ -285,7 +285,33 @@ fo(); // { a: 111 } [111, 222] undefined
 
     浅拷贝实现方法：
         1、直接赋值
-        3、Object.assign
+        2、Object.assign
+
+```sh
+    ... 操作符复制obj，严谨的说浅拷贝，但是如果obj是个简单对象的时候 比如都是string num boolean等，实现的效果约等于深拷贝，如果是复杂对象如obj、array等则不行
+例1：
+    const obj = { a: 2 };
+    const newObj = {...obj};
+    console.log(newObj === obj) // true
+
+    newObj.a = 3
+    console.log(newObj, obj) // { a: 3 } { a: 2 }
+
+例2：
+    const obj = {
+        a:2,
+        b:{ c:3}
+    }
+
+    const newObj = { ...obj }
+
+    console.log(newObj === obj, newObj.b === obj.b ) // false true
+
+    newObj.a = 3;
+    newObj.b.c = 5;
+
+    console.log(newObj, obj ) // { a: 3, b: { c: 5 } }, { a: 2, b: { c: 5 } }
+```
 
 # 循环跳出问题
     for、forEach、for...in、for...of、map、every、some
