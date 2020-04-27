@@ -316,7 +316,27 @@ fo(); // { a: 111 } [111, 222] undefined
 # 循环跳出问题
     for、forEach、for...in、for...of、map、every、some
 
-    forEach、map  无法跳出 无论是return 还是break都不行
+    forEach、map  无论是return 还是break都无法跳出，但是try...catch 可以跳出，但一般不这么玩
+    try...catch 可以跳出
+    // 跳出forEach
+    try {
+        [1,2,3].forEach(element => {
+            console.log(element);
+            if (element === 1) throw Error()
+        });  
+    } catch (_){
+        console.log('----')
+    }
+
+    // 跳出map
+    try {
+        [1,2,3].map(element => {
+            console.log(element);
+            if (element === 1) throw Error()
+        });  
+    } catch (_){
+        console.log('----')
+    }
 
     for (let i = 0; i < 10; i++) {
         console.log(i);
