@@ -1,3 +1,25 @@
+# hooks出现的原因/动机/解决了什么问题
+    1、在组件之间复用状态逻辑很难，Hook 使你在无需修改组件结构的情况下复用状态逻辑；
+    2、复杂组件变得难以理解，组件复杂之后变得难以理解，Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据），
+    componentDidMount中可能会进行很多操作，如设置事件监听，而之后需在 componentWillUnmount 中清除，如果使用useEffect 则能将这两个部分合并在一起；
+    3、Hook 使你在非 class 的情况下可以使用更多的 React 特性；降低了学习难度，简化了代码；
+
+# Hook 规则
+    1、只在最顶层使用 Hook，不要在循环，条件或嵌套函数中调用 Hook；
+    2、只在 React 函数中调用 Hook；不要在普通的 JavaScript 函数中调用 Hook。
+
+    尽量不在闭包中使用hooks的值，在callback中可能会无法获取到hooks的值，比如useState的value，
+    const [state, setState] = useState({});
+
+    console.log(state);
+    window.addEventListener('resize', (e)=>{
+        console.log(state) // 无论怎么改变 打印出来的始终是初始值 {}
+        setState({
+            width: e.target.innerWidth,
+            height: e.target.innerHeight
+        })
+    })
+
 # react-hooks 遇到的问题
 ## 定时器问题
     因react-hooks是无状态组件，所以this无法使用，在组件头部定义timer时，每次setState时timer会被重置

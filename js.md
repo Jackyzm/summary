@@ -17,8 +17,8 @@ console.log(array)  // [1, 2, 5, 3, 4]
     {}.propertyIsEnumerable.call(obj, "key")
 
 # let var
-    let 可以讲变量绑定在所在的任意作用域中；
-    let 会生成一个“暂时性死区” 在作用域内无法被再次声明 但可以多次赋值
+    let 可以将变量绑定在所在的任意作用域中；
+    let 会生成一个“暂时性死区” TDZ (Temporal Dead Zone) 在作用域内无法被再次声明 但可以多次赋值
 
 # let const
     let const 均可以用来创建块作用域变量
@@ -78,6 +78,8 @@ const func = () => {
 # 作用域 作用域链
     作用域是一套规则，用于确定在何处以及如何查找变量。如果查找的目的是为了赋值，那么会进行LHS查询 比如执行语句 a = 2, 就需要执行一次LHS(Left-hand Side)查询，如果a不在作用域中，则会抛出错误，ReferenceError; 如果查询的目的是获取变量的值，则会进行RHS(Right-hand Side)查询 比如执行console.log(a)，则会对a执行RHS查询；
     在查询的时候会先在当前作用域查找，如果当前作用域找不到，则会向上级作用域查找，直到全局作用域，当找完全局作用域之后，无论有没有找到都会结束查找，这就是作用域链；
+
+    在es5中try...catch 会形成块作用域  立即执行函数（IIFE）也会形成
 
     函数作用域
         在函数内部是一个独立的作用域，在es6之前也是如此，函数作用域也是块级作用域的一种；
@@ -236,7 +238,6 @@ fo(); // { a: 111 } [111, 222] undefined
 
     如果不指定一个构造函数(constructor)方法, 则使用一个默认的构造函数(constructor)
 
-
 # new 关键字
     并没有所谓的“构造函数”，只有对函数的构造调用；
 
@@ -317,6 +318,7 @@ fo(); // { a: 111 } [111, 222] undefined
     for、forEach、for...in、for...of、map、every、some
 
     forEach、map  无论是return 还是break都无法跳出，但是try...catch 可以跳出，但一般不这么玩
+    forEach、map的区别： map会返回一个新的数据，并且不会印象原数组
     try...catch 可以跳出
     // 跳出forEach
     try {
@@ -387,3 +389,38 @@ fo(); // { a: 111 } [111, 222] undefined
     原因：
         js是顺序执行的， 1<2 判断为true，true<3 为true
         3>2 判断为true，true>1 判断为false
+
+# 0.1+0.2 === 0.3 // false
+    使用Number.EPSILON（机器精度）判断
+    function numberIsEqual(num1, num2) {
+        return Math.abs(num1 - num2) < Number.EPSILON
+    }
+
+    console.log(0.1+0.2 === 0.3) // false
+    console.log(numberIsEqual(0.1+0.2,0.3)) // true
+
+# jsonp的原理
+    动态创建一个script标签，在script的url中传入一个callback函数，服务端封装好数据之后将数据拼接在url里，浏览器加载完毕之后就会调用callback函数，这时就能在callback中获取到返回的数据
+    
+# 现在跨域均需遵循CORS机制 "跨域资源共享"(Cross-origin resource sharing)
+    对于简单请求，CORS请求会在请求头信息之中增加一个Origin字段。Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。
+    非简单请求是对那种对服务器有特殊要求的请求，比如请求方式是PUT或者DELETE，或者Content-Type字段类型是application/json。都会在正式通信之前，增加一次HTTP请求，称之为预检。浏览器会先询问服务器，当前网页所在域名是否在服务器的许可名单之中；
+    后台可以通过拦截器排除options；
+
+    withCredentials 是否同意携带cookie；
+
+    CORS请求需要客户端/浏览器 及服务端均支持；
+    OPTIONS请求/CORS预检请求，
+        OPTIONS请求方法的主要用途有两个：
+            1、获取服务器支持的HTTP请求方法；
+            2、用来检查服务器的性能。
+    
+    现在xhr/fetch 均使用cors进行跨域
+# Window.getComputedStyle()
+    Window.getComputedStyle()方法返回一个对象，该对象在应用活动样式表并解析这些值可能包含的任何基本计算后报告元素的所有CSS属性的值。 私有的CSS属性值可以通过对象提供的API或通过简单地使用CSS属性名称进行索引来访问。
+
+    let style = window.getComputedStyle(element, [pseudoElt]);
+    element
+    用于获取计算样式的Element。
+    pseudoElt 可选
+    指定一个要匹配的伪元素的字符串。必须对普通元素省略（或null）。
