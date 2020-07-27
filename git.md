@@ -17,3 +17,12 @@
             }
         },
         ...
+
+
+# git 文件名大小写不敏感 
+
+    仅更改当前项目
+        git config core.ignorecase false
+
+    全局更改
+        git config --global core.ignorecase true
