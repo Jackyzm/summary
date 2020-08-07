@@ -57,3 +57,9 @@ $ git clone https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git master
 最后进入自己的工程，在自己工程的podFile第一行加上：
 
 source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+
+
+
+# react-navigation 路由嵌套问题
+    StackNavigator 能直接嵌套 BottomTabNavigator, BottomTabNavigator中也能直接嵌套StackNavigator
+    在StackNavigator中 不能直接嵌套 StackNavigator，要放具体的组件
