@@ -70,3 +70,21 @@
         )
     })
 ```
+
+## useCallback
+
+```sh
+    const func = (a, b) => {
+        console.log(a, b);
+    }
+    // 如果useCallback中的函数仅依赖监听的参数，则按照官方的写法即可
+    // 如果useCallback中的函数既依赖监听的参数，也依赖调用时传入的参数，则需要用以下的方法，将具体执行的方法再包一下
+    const _func = useCallback(
+        (b) => {
+            ((a) => {
+                func(a, b);
+            })(a);
+        },
+        [a]
+    );
+```
