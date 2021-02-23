@@ -1,3 +1,25 @@
+# promise.all 返回结果与传入的数组一致 不会因为先后顺序而改变
+    var p1 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 1000, 'one');
+    });
+    var p2 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 2000, 'two');
+    });
+    var p3 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 3000, 'three');
+    });
+    var p4 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 4000, 'four');
+    });
+
+    Promise.all([p1, p2, p3, p4]).then(values => {
+        console.log(values);
+    }, reason => {
+        console.log(reason)
+    });
+
+    result: ["one", "two", "three", "four"]
+
 # es6 数组快速去重
 ```sh
 const set1 = new Set([1, 2, 5, 3, 4, 5, 5]);

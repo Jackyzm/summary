@@ -88,3 +88,20 @@
         [a]
     );
 ```
+
+## 闭包导致state拿不到最新值
+
+    1、在组件内部使用一个变量cache一下   (props更新可能会丢失)
+
+    2、可以尝试useCallback（有时可以）
+
+    3、使用useRef，将最新的state放到current中 原理一致 （终极解决方案）
+
+## forwardRef
+    父组件需要在useEffect中监听ref值  才能打印出最新的ref
+
+    子组件中 可以直接给forwardRef传过来的ref赋值 修改current，并且在父组件中拿到
+
+## 奇淫技巧
+    兄弟组件方法调用：
+    可以通过父组件state，在子组件中set func，在兄弟组件中调用
