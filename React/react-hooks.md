@@ -105,3 +105,18 @@
 ## 奇淫技巧
     兄弟组件方法调用：
     可以通过父组件state，在子组件中set func，在兄弟组件中调用
+
+## 在hooks中模拟willmount
+    function Component(props) {
+        console.log('Body');
+        const [count, setCount] = useState(0);
+        const willMount = useRef(true);
+
+        if (willMount.current) {
+            console.log('First time load (it runs only once)');
+            setCount(2);
+            willMount.current = false;
+        } else {
+            console.log('Repeated load');
+        }
+    }
