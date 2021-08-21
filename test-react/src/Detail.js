@@ -12,10 +12,12 @@ const Detail = () => {
     }, []);
 
     console.log('render');
-    return <div>
-        <div>Detail</div>
-        <button onClick={ () => history.push('/detail/222') }>detail/222</button>
-    </div>
+    return (
+        <div>
+            <div>Detail</div>
+            <button onClick={ () => history.push('/detail/222') }>detail/222</button>
+        </div>
+    );
 }
 
 export default Detail
