@@ -623,3 +623,15 @@ promiseAll([p3, p1, p2]).then(res => {
             }
         }
     }
+
+# 原型 原型链
+
+    prototype  __proto__
+    显示原型prototype，只有构造函数上具有该属性，同时构造函数也是对象，具有__proto__
+
+    JavaScript一切皆对象，所有的对象都有__proto__
+
+    在js中，所有的对象都有原型，这个原型又有原型，构成原型链
+
+    例子：Function.__proto__ === Function.prototype
+    Function.__proto__.__proto__ === Object.prototype
