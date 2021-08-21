@@ -18,7 +18,7 @@ class Detail1 extends Component {
                 <div>Detail</div>
                 <button onClick={ () => this.props.history.push('/detail3?id=222') }>detail3?id=222</button>
             </div>
-        )
+        );
     }
 }
 
