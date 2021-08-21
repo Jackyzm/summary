@@ -13,10 +13,12 @@ class Detail1 extends Component {
     render() {
         console.log('render');
 
-        return <div>
-            <div>Detail</div>
-            <button onClick={ () => this.props.history.push('/detail1/222') }>detail1/222</button>
-        </div>
+        return (
+            <div>
+                <div>Detail</div>
+                <button onClick={ () => this.props.history.push('/detail1/222') }>detail1/222</button>
+            </div>
+        )
     }
 }
 
