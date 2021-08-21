@@ -11,10 +11,12 @@ const Detail = () => {
     }, []);
 
     console.log('render');
-    return <div>
-        <div>Detail</div>
-        <button onClick={ () => history.push('/detail2?id=222') }>detail2?id=222</button>
-    </div>
+    return (
+        <div>
+            <div>Detail</div>
+            <button onClick={ () => history.push('/detail2?id=222') }>detail2?id=222</button>
+        </div>
+    );
 }
 
 export default Detail
