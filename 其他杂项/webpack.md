@@ -70,3 +70,17 @@ const result = babel.transformFileSync('conversion.js', {
 });
 fs.writeFileSync('./build.js', result.code);
 ```
+
+
+### 组件库 tree shaking
+
+    在package.json中添加如下代码
+    
+```sh
+"sideEffects": [
+    "dist/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
+],
+```
